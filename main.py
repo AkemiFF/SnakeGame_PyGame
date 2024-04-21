@@ -43,6 +43,7 @@ def main():
     game_over_handler = GameOver(SCREEN_WIDTH, SCREEN_HEIGHT)
     collision_handler = CollisionHandler()
 
+    highest_score = 0
     running = Running()
     while running.get_status():
 
@@ -62,9 +63,8 @@ def main():
             highest_score = score_list.max()
             game_over_handler.show_game_over_screen(
                 screen, score, food, running, highest_score)
-            print(highest_score)
 
-        redraw_screen(screen, snake, food, score)
+        redraw_screen(screen, snake, food, score, highest_score)
 
         clock.tick(FPS)
 

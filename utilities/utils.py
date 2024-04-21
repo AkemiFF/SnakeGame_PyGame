@@ -8,7 +8,7 @@ def draw_grid(surface, screen_width, screen_height, block_size):
         pygame.draw.line(surface, (100, 100, 100), (0, y), (screen_width, y))
 
 
-def redraw_screen(surface, snake, food, score):
+def redraw_screen(surface, snake, food, score, highest_score):
     surface.fill((0, 0, 0))
     snake.draw(surface)
     food.draw(surface)
@@ -18,7 +18,13 @@ def redraw_screen(surface, snake, food, score):
     score_font = pygame.font.SysFont(None, 24)
     score_text = score_font.render(
         "Score: " + str(score.get_score()), True, (255, 255, 255))
+
+    high_score_font = pygame.font.SysFont(None, 24)
+    high_score_text = score_font.render(
+        "Highest Score: " + str(highest_score), True, (255, 255, 255))
+
     surface.blit(score_text, (10, 10))
+    surface.blit(high_score_text, (10, 30))
 
     pygame.display.update()
 
