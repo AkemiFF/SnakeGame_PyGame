@@ -28,17 +28,18 @@ class Running():
         return self.running_status
 
     def set_running_true(self):
-        print("True")
+
         self.running_status = True
 
     def set_running_false(self):
-        print("False")
+
         self.running_status = False
 
 
 def main():
     snake = Snake(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, BLOCK_SIZE)
     food = Food(BLOCK_SIZE, SCREEN_WIDTH, SCREEN_HEIGHT)
+    score_list = []
     score = Score()
     input_handler = InputHandler()
     game_over_handler = GameOver(SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -59,8 +60,10 @@ def main():
         if collision_handler.check_collision_with_self(head_position, snake) or collision_handler.check_collision_with_wall(head_position, SCREEN_WIDTH, SCREEN_HEIGHT):
             running.set_running_false()
             snake.reset(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, BLOCK_SIZE)
+            score_list.append(score.get_score())
             game_over_handler.show_game_over_screen(
                 screen, score, food, running)
+            print(score_list)
 
         redraw_screen(screen, snake, food, score)
 
