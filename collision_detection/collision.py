@@ -21,7 +21,7 @@ class CollisionHandler:
             head_position[1] < 0 or
             head_position[1] >= screen_height
         ):
-            print(
-                f"head : {head_position}\nwidth : {screen_width}\nheight : {screen_height}\n\n")
+            # print(
+            #     f"head : {head_position}\nwidth : {screen_width}\nheight : {screen_height}\n\n")
             return True
         return False
