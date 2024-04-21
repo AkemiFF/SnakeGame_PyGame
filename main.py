@@ -61,7 +61,7 @@ def main():
             score_list = np.append(score_list, score.get_score())
             highest_score = score_list.max()
             game_over_handler.show_game_over_screen(
-                screen, score, food, running)
+                screen, score, food, running, highest_score)
             print(highest_score)
 
         redraw_screen(screen, snake, food, score)
