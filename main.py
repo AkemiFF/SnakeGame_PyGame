@@ -6,14 +6,14 @@ from scoring.score import Score
 from input_handling.input_handler import InputHandler
 from game_over_handling.game_over import GameOver
 from utilities.utils import redraw_screen
+import numpy as np
 
-# Définition des constantes
+
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 BLOCK_SIZE = 20
 FPS = 10
 
-# Initialisation de Pygame
 pygame.init()
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -28,18 +28,16 @@ class Running():
         return self.running_status
 
     def set_running_true(self):
-
         self.running_status = True
 
     def set_running_false(self):
-
         self.running_status = False
 
 
 def main():
     snake = Snake(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, BLOCK_SIZE)
     food = Food(BLOCK_SIZE, SCREEN_WIDTH, SCREEN_HEIGHT)
-    score_list = []
+    score_list = np.array([0])
     score = Score()
     input_handler = InputHandler()
     game_over_handler = GameOver(SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -60,10 +58,11 @@ def main():
         if collision_handler.check_collision_with_self(head_position, snake) or collision_handler.check_collision_with_wall(head_position, SCREEN_WIDTH, SCREEN_HEIGHT):
             running.set_running_false()
             snake.reset(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, BLOCK_SIZE)
-            score_list.append(score.get_score())
+            score_list = np.append(score_list, score.get_score())
+            highest_score = score_list.max()
             game_over_handler.show_game_over_screen(
                 screen, score, food, running)
-            print(score_list)
+            print(highest_score)
 
         redraw_screen(screen, snake, food, score)
 
